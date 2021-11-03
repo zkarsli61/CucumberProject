@@ -1,0 +1,106 @@
+[
+  {
+    "line": 2,
+    "elements": [
+      {
+        "start_timestamp": "2021-11-03T10:40:38.605Z",
+        "before": [
+          {
+            "result": {
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepdefinitions.Hooks.setUp()"
+            }
+          }
+        ],
+        "line": 5,
+        "name": "TC01_user_should_login_with_manager_profile",
+        "description": "",
+        "id": "fe1009-room-reservation;tc01-user-should-login-with-manager-profile",
+        "after": [
+          {
+            "result": {
+              "duration": 4809171800,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepdefinitions.Hooks.tearDown(io.cucumber.java.Scenario)"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 8472686700,
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "user is on the application page",
+            "match": {
+              "location": "stepdefinitions.Day19_Login_Step_Definitions.user_is_on_the_application_page()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 5004200,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "user enters manager_id and manager_password",
+            "match": {
+              "location": "stepdefinitions.Day19_Login_Step_Definitions.user_enters_manager_id_and_manager_password(io.cucumber.datatable.DataTable)"
+            },
+            "rows": [
+              {
+                "cells": [
+                  "id",
+                  "password"
+                ]
+              },
+              {
+                "cells": [
+                  "manager",
+                  "Manager1!"
+                ]
+              },
+              {
+                "cells": [
+                  "manager2",
+                  "Manager2!"
+                ]
+              }
+            ],
+            "keyword": "And "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@room_reservation"
+          },
+          {
+            "name": "@wip"
+          }
+        ]
+      }
+    ],
+    "name": "FE1009_Room_Reservation",
+    "description": "",
+    "id": "fe1009-room-reservation",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/features/US100451_All_fields_are_required_to_make_a_room_reservation.feature",
+    "tags": [
+      {
+        "name": "@room_reservation",
+        "type": "Tag",
+        "location": {
+          "line": 1,
+          "column": 1
+        }
+      }
+    ]
+  }
+]
