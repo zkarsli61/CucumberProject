@@ -9,6 +9,7 @@ import pages.DefaultPage;
 import pages.LoginPage;
 import utilities.ConfigReader;
 import utilities.Driver;
+import utilities.ExcelUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -63,12 +64,12 @@ public class Day19_Login_Step_Definitions {
 // Getting the data as List<List<String>>
 //    List<List<String>> managerCredentials = credentials.asLists();
 
-    //        for (List<String> each : managerCredentials) {
-    //            if(!each.get(0).equals("id")){
-    //                loginPage.username.sendKeys(each.get(0));
-    //                loginPage.password.sendKeys(each.get(1));
-    //            };
-    //        }
+        //        for (List<String> each : managerCredentials) {
+        //            if(!each.get(0).equals("id")){
+        //                loginPage.username.sendKeys(each.get(0));
+        //                loginPage.password.sendKeys(each.get(1));
+        //            };
+        //        }
 
         // Use lambda
 //        managerCredentials.stream()
@@ -80,13 +81,59 @@ public class Day19_Login_Step_Definitions {
 //                );
 
 //        3. List<Map<String,String>>
-        List<Map<String,String>> managerCredentials = credentials.asMaps(String.class,String.class);
+        List<Map<String, String>> managerCredentials = credentials.asMaps(String.class, String.class);
         System.out.println(managerCredentials);
-        for (Map<String,String> each:managerCredentials) {
+        for (Map<String, String> each : managerCredentials) {
             loginPage.username.sendKeys(each.get("id"));
             loginPage.password.sendKeys(each.get("password"));
         }
     }
 
+    ExcelUtil excelUtil;
+    List<Map<String, String>> testData;
 
+    public void setUp() throws InterruptedException {
+        Driver.getDriver().get(ConfigReader.getProperty("app_qa_environment"));
+        loginPage = new LoginPage();
+        Thread.sleep(1000);
+        try {
+            Thread.sleep(1000);
+            loginPage.advancedLink.click();
+            Thread.sleep(1000);
+            loginPage.proceedLink.click();
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            System.out.println("Advanced Link and Proceed Link is not displayed");
+        }
+    }
+
+    @Given("user log in the application using excel admin")
+    public void user_log_in_the_application_using_excel_admin() throws InterruptedException {
+        String path = "src/test/resources/testdata/smoketestdata.xlsx";
+        String sheetName = "admin_login_info";
+        excelUtil = new ExcelUtil(path, sheetName);
+        testData = excelUtil.getDataList();
+        System.out.println(testData);//[{password=Techproed123!, username=admin}]
+        for (Map<String, String> eachData : testData) {//eachData represent each username-password pairs
+            setUp();//login in each loop
+            loginPage.username.sendKeys(eachData.get("username"));//admin
+            loginPage.password.sendKeys(eachData.get("password"));//Techproed123!
+            loginPage.loginButton.click();
+        }
+    }
+
+    @Given("user log in the application using excel manager")
+    public void user_log_in_the_application_using_excel_manager() throws InterruptedException {
+        String path ="./src/test/resources/testdata/smoketestdata.xlsx";
+        String sheetName="manager_login_info";
+        excelUtil= new ExcelUtil(path,sheetName);
+        testData=excelUtil.getDataList();
+        System.out.println(testData);//[{password=Techproed123!, username=admin}]
+        for(Map<String,String> eachData : testData ){//eachData represent each username-password pairs
+            setUp();//login in each loop
+            loginPage.username.sendKeys(eachData.get("username"));//admin
+            loginPage.password.sendKeys(eachData.get("password"));//Techproed123!
+            loginPage.loginButton.click();
+        }
+    }
 }

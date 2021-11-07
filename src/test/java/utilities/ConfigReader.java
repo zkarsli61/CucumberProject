@@ -10,7 +10,7 @@ public class ConfigReader {
     //Using static block to run this code before the methods
     static{
         //path of the properties file
-        String path = "config.properties";
+        String path = "configuration.properties";
         //opening the file
         try {
             FileInputStream fileInputStream = new FileInputStream(path);

@@ -9,14 +9,16 @@ import org.junit.runner.RunWith;
 //        "src/test/java/stepdefinitions" })
 @CucumberOptions(
         plugin = {
+                "pretty",
                 "html:target/default-cucumber-reports.html",
                 "json:target/json-reports/cucumber.json",
                 "junit:target/xml-report/cucumber.xml",
-                "rerun:target/failedRerun.txt"
+                "rerun:target/failedRerun.txt",
+                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"
         },
         features = "./src/test/resources/features",
         glue = "stepdefinitions",
-        tags = "@wip",
+        tags = "@data_tables_hw",
         dryRun = false
 )
 public class Runner {
